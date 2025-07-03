@@ -15,7 +15,7 @@ spring:
           backend-gateway-client:
             provider: keycloak-idp
             client-id: backend-gateway-client-id
-            client-secret: 3PESLQV51OEWLckf2I4F9v4gFG7gwi4S
+            client-secret: TKx93oSPPiPvfGvVto5lBjXetzHFBtfB
             authorization-grant-type: authorization_code
             redirect-uri: http://modushop-backend-gateway-oauth2-client:8080/login/oauth2/code/{registrationId}
             scope: openid
