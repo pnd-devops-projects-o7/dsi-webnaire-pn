@@ -54,7 +54,7 @@ services:
     image: placidenduwayo1/modushop-configuration-service:latest
     container_name: modushop-configuration-service
     build:
-      context: ../modushop-hexagonal-archi-micros-app/modu-shop-configuration-service
+      context: ../modushop-technical-services/modu-shop-configuration-service
       dockerfile: Dockerfile
     ports:
       - "8888:8888"
@@ -73,7 +73,7 @@ services:
     image: placidenduwayo1/modushop-registration-service:latest
     container_name: modushop-registration-service
     build:
-      context: ../modushop-hexagonal-archi-micros-app/modu-shop-registration-service
+      context: ../modushop-technical-services/modu-shop-registration-service
       dockerfile: Dockerfile
     ports:
       - "8761:8761"
@@ -95,7 +95,7 @@ services:
     image: placidenduwayo1/modushop-backend-gateway-oauth2-client:latest
     container_name: modushop-backend-gateway-oauth2-client
     build:
-      context: ../modushop-hexagonal-archi-micros-app/modu-shop-backend-gateway-client
+      context: ../modushop-technical-services/modu-shop-backend-gateway-client
       dockerfile: Dockerfile
     ports:
       - "8080:8080"

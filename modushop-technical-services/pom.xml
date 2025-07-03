@@ -18,5 +18,6 @@
         <module>modu-shop-registration-service</module>
         <module>modu-shop-backend-gateway-client</module>
     </modules>
+    <packaging>pom</packaging>
 
 </project>

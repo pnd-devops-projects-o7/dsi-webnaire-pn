@@ -15,9 +15,6 @@
     </properties>
 
     <modules>
-        <module>modu-shop-configuration-service</module>
-        <module>modu-shop-registration-service</module>
-        <module>modu-shop-gateway-service</module>
         <module>modu-shop-bs-microservice-user</module>
         <module>modu-shop-bs-microservice-product</module>
         <module>modu-shop-bs-microservice-order</module>

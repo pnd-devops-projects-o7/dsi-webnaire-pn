@@ -7,8 +7,10 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/pnd-devops-projects-o7/modushop-cloud-services-config-files.git
+          uri: https://github.com/pnd-devops-projects-o7/dsi-webnaire-pn.git
           default-label: main
-          search-paths: modushop-hexagonal-archi-micros-app
+          search-paths:
+            - modushop-hexagonal-archi-micros-app
+            - modushop-microservices-base-app
 server:
   port: 8888

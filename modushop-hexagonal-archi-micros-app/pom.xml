@@ -16,9 +16,6 @@
 
     <packaging>pom</packaging>
     <modules>
-        <module>modu-shop-configuration-service</module>
-        <module>modu-shop-registration-service</module>
-        <module>modu-shop-backend-gateway-client</module>
         <module>modu-shop-hexagonal-architecture-bs-ms-user</module>
         <module>modu-shop-hexagonal-architecture-bs-ms-product</module>
         <module>modu-shop-hexagonal-architecture-bs-ms-order</module>
