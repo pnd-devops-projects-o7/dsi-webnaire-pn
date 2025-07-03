@@ -8,9 +8,9 @@ This git repo contains 5 folders:
    -   to see how it is linked to this folder
    -   how each microservice configuration (bootstrap.yml) is linked to the configuration service
 # modushop-docker-imgs-deploy
-this folder contains a stack of deployment of:
-- ***modushop-db***: mysql database service name
-- ***modushop-keycloak-idp***: keycloak service name
+this folder contains a stack of deployment of the following services name into docker
+- _modushop-db_
+- _modushop-keycloak-idp_
 -  **technical servces**:
     - _modushop-configuration-service_
     - _modushop-registration-service_
@@ -31,7 +31,7 @@ this folder contains source code for 3 business microservices written into mvc p
 - modu-shop-bs-microservice-product
 - modu-shop-bs-microservice-user
 # modushop-technical-services
-this folder contains technical services:
+this folder contains sources of technical services
 - modu-shop-backend-gateway-client
 - modu-shop-configuration-service
 - modu-shop-registration-service
