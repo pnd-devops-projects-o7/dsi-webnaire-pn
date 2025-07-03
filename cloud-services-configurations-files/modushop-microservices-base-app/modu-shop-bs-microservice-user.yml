@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: modu-shop-bs-microservice-user
+  datasource:
+    url: jdbc:mysql://localhost:3306/users_db
+server:
+  port: 8081

@@ -1,0 +1,175 @@
+services:
+  # db service
+  modushop-db:
+    image: mysql:8.4.1
+    container_name: modushop-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - modushop-db-data:/var/lib/mysql
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-proot" ]
+      start_period: 30s
+      interval: 15s
+      timeout: 10s
+      retries: 3
+    networks:
+      - modushop_proxy_net
+
+  # keycloak service
+  modushop-keycloak-idp:
+    image: quay.io/keycloak/keycloak:26.0.6
+    container_name: modushop-keycloak-idp
+    environment:
+      KC_DB: mysql
+      KC_DB_URL: jdbc:mysql://modushop-db:3306/keycloak_db
+      KC_DB_USERNAME: root
+      KC_DB_PASSWORD: root
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HOSTNAME: modushop-keycloak-idp  #in production mode a hostname is required, hostname can be localhost or a dns
+      KC_HTTP_PORT: 8079
+      KC_HTTPS_PORT: 8443
+      KC_HTTP_ENABLED: true
+      KC_HTTPS_ENABLED: true
+      KC_HEALTH_ENABLED: true
+    command:
+      - start-dev
+      - --verbose
+    depends_on:
+      modushop-db:
+        condition: service_healthy
+    ports:
+      - "8079:8079"
+      - "8443:8443"
+    restart: always
+    networks:
+      - modushop_proxy_net
+
+  # configuration server
+  modushop-configuration-service:
+    image: placidenduwayo1/modushop-configuration-service:latest
+    container_name: modushop-configuration-service
+    build:
+      context: ../modushop-hexagonal-archi-micros-app/modu-shop-configuration-service
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    networks:
+      - modushop_proxy_net
+    healthcheck:
+      test: [ "CMD","curl","-I","http://modushop-configuration-service:8888" ]
+      start_period: 30s
+      interval: 15s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # registry service
+  modushop-registration-service:
+    image: placidenduwayo1/modushop-registration-service:latest
+    container_name: modushop-registration-service
+    build:
+      context: ../modushop-hexagonal-archi-micros-app/modu-shop-registration-service
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - modushop_proxy_net
+    depends_on:
+      modushop-configuration-service:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD","curl","-I","http://modushop-registration-service:8761" ]
+      start_period: 30s
+      interval: 15s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # backend gateway client
+  modushop-backend-gateway-oauth2-client:
+    image: placidenduwayo1/modushop-backend-gateway-oauth2-client:latest
+    container_name: modushop-backend-gateway-oauth2-client
+    build:
+      context: ../modushop-hexagonal-archi-micros-app/modu-shop-backend-gateway-client
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - modushop_proxy_net
+    depends_on:
+      modushop-registration-service:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      KEYCLOAK_ISSUER_URI: http://modushop-keycloak-idp:8079/realms/modushop_app_realm
+
+  #--------- business microservices-----------
+  modushop-hexagonal-archi-bs-ms-user:
+    image: placidenduwayo1/modushop-hexagonal-archi-bs-ms-user:latest
+    container_name: modushop-hexagonal-archi-bs-ms-user
+    build:
+      context: ../modushop-hexagonal-archi-micros-app/modu-shop-hexagonal-architecture-bs-ms-user
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - modushop_proxy_net
+    depends_on:
+      modushop-registration-service:
+        condition: service_healthy
+      modushop-db:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      KEYCLOAK_ISSUER_URI: http://modushop-keycloak-idp:8079/realms/modushop_app_realm
+
+  modushop-hexagonal-archi-bs-ms-product:
+    image: placidenduwayo1/modushop-hexagonal-archi-bs-ms-product:latest
+    container_name: modushop-hexagonal-archi-bs-ms-product
+    build:
+      context: ../modushop-hexagonal-archi-micros-app/modu-shop-hexagonal-architecture-bs-ms-product
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    networks:
+      - modushop_proxy_net
+    depends_on:
+      modushop-registration-service:
+        condition: service_healthy
+      modushop-db:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      KEYCLOAK_ISSUER_URI: http://modushop-keycloak-idp:8079/realms/modushop_app_realm
+
+  modushop-hexagonal-archi-bs-ms-order:
+    image: placidenduwayo1/modushop-hexagonal-archi-bs-ms-order:latest
+    container_name: modushop-hexagonal-archi-bs-ms-order
+    build:
+      context: ../modushop-hexagonal-archi-micros-app/modu-shop-hexagonal-architecture-bs-ms-order
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    networks:
+      - modushop_proxy_net
+    depends_on:
+      modushop-registration-service:
+        condition: service_healthy
+      modushop-db:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      KEYCLOAK_ISSUER_URI: http://modushop-keycloak-idp:8079/realms/modushop_app_realm
+
+volumes:
+  modushop-db-data:
+
+networks:
+  modushop_proxy_net:
+    name: modushop_proxy_net
+    driver: bridge

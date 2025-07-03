@@ -1,0 +1,8 @@
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: modushop-registration-service
+  cloud:
+    config:
+      uri: http://modushop-configuration-service:8888

@@ -1,0 +1,14 @@
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: modushop-configuration-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/pnd-devops-projects-o7/modushop-cloud-services-config-files.git
+          default-label: main
+          search-paths: modushop-hexagonal-archi-micros-app
+server:
+  port: 8888

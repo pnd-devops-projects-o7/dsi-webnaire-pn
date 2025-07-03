@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: modu-shop-bs-microservice-order
+  main:
+    banner-mode: off
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+#------------ remote clients ------------
+remote:
+  user-service:
+    name: modu-shop-bs-microservice-user
+    url: http://localhost:8081
+    context-path: /api/users
+  product-service:
+    name: modu-shop-bs-microservice-product
+    url: http://localhost:8082
+    context-path: /api/products

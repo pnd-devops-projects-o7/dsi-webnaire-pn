@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: modu-shop-bs-microservice-product
+  cloud:
+    config:
+      uri: http://localhost:8888
+  datasource:
+    url: jdbc:mysql://localhost:3306/products_db
+server:
+  port: 8082

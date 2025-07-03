@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: modushop-backend-gateway-oauth2-client
+  # business microservices routes configuration
+  cloud:
+    gateway:
+      routes:
+        - id: modushop-hexagonal-archi-bs-ms-user
+          uri: http://modushop-hexagonal-archi-bs-ms-user:8081
+          predicates:
+            - Path=/api/users/**
+        - id: modushop-hexagonal-archi-bs-ms-product
+          uri: http://modushop-hexagonal-archi-bs-ms-product:8082
+          predicates:
+            - Path=/api/products/**
+        - id: modushop-hexagonal-archi-bs-ms-order
+          uri: http://modushop-hexagonal-archi-bs-ms-order:8083
+          predicates:
+            - Path=/api/orders/**
+
+      default-filters:
+        - TokenRelay= # instruct the backend gateway client is a token relay
+server:
+  port: 8080

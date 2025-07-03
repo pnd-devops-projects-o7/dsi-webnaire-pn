@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: modushop-hexagonal-archi-bs-ms-order
+  main:
+    banner-mode: off
+    # get your configuration from server
+  cloud:
+    config:
+      uri: http://modushop-configuration-service:8888
+
+#------------ remote clients variables------------
+remote:
+  user-service:
+    name: modushop-hexagonal-archi-bs-ms-user
+    url: http://modushop-hexagonal-archi-bs-ms-user:8081
+    context-path: /api/users
+  product-service:
+    name: modushop-hexagonal-archi-bs-ms-product
+    url: http://modushop-hexagonal-archi-bs-ms-product:8082
+    context-path: /api/products
+
+# client défini dans keycloak
+keycloak-client-id: backend-gateway-client-id

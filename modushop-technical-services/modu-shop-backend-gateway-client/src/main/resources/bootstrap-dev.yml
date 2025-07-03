@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: modushop-backend-gateway-oauth2-client
+  main:
+    banner-mode: off
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+  # register gateway service as keycloak client
+  security:
+    oauth2:
+      client:
+        registration:
+          backend-gateway-client:
+            provider: keycloak-idp
+            client-id: backend-gateway-client-id
+            client-secret: 3PESLQV51OEWLckf2I4F9v4gFG7gwi4S
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/{registrationId}
+            scope: openid
+        provider:
+          keycloak-idp:
+            issuer-uri: http://localhost:8079/realms/modushop_app_realm
+
+      resourceserver:
+        jwt:
+          issuer-uri: ${spring.security.oauth2.client.provider.keycloak-idp.issuer-uri}
