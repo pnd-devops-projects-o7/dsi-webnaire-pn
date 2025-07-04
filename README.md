@@ -3,7 +3,7 @@
 ## demo: global architecture
 ![Image1](https://github.com/user-attachments/assets/e8f20a50-69bd-4961-bf27-c095ebe02c87)
 
-  ## flow of user authentication with keycloak
+  ## user authentication flow with keycloak 
   ![exalt-bank-account-app-flows-1](https://github.com/user-attachments/assets/064e75af-cd6d-4d1a-b883-631da7a1076d)
 
 This git repo contains 5 folders:
