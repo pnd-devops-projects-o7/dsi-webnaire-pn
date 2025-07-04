@@ -64,10 +64,11 @@ this folder contains sources of technical services
    - ```docker compose -f  modushop-db-keycloak-compose up -d```
 
  ## keycloak doc:
- - refer keycloak documentation to see how to create realms, clients, client role, realm role and user
- - for modushop-app, i create:
+ - refer keycloak documentation to see how to install create realms, clients, client role, realm role and user
+ - for modushop-app, i install keycloak from docker image and create:
     - realm: ```modushop_app_realm```
     - client: ```backend-gateway-client-id```
     - realm roles: ```modushop_realm_admin_role``` and ```modushop_realm_user_role```
     - client role: ```modushop_admin_role``` et ```modushop_user_role```
+    - i configure keyckloak dns in ../etc/hosts file like: ```127.0.0.1 modushop-keycloak-idp```
   
