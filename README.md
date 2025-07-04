@@ -1,6 +1,6 @@
 
 # Webnaire 03/07/2025
-## demo
+## demo: global architecture
 ![Image1](https://github.com/user-attachments/assets/e8f20a50-69bd-4961-bf27-c095ebe02c87)
 
   ## flow of user authentication with keycloak
