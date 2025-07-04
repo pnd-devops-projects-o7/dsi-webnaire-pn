@@ -1,8 +1,12 @@
 
 # Webnaire 03/07/2025
+## demo
 ![Image1](https://github.com/user-attachments/assets/e8f20a50-69bd-4961-bf27-c095ebe02c87)
-This git repo contains 5 folders:
 
+  ## flow of user authentication with keycloak
+  ![exalt-bank-account-app-flows-1](https://github.com/user-attachments/assets/064e75af-cd6d-4d1a-b883-631da7a1076d)
+
+This git repo contains 5 folders:
 # cloud-services-configurations-files
 - this folder contains all configuration files for all services of modushop-app. 
 - the configuration service pull configs from (this folder and distribute them to each service that asks its configurations.
