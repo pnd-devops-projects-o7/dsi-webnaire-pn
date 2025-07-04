@@ -13,9 +13,6 @@ business product microservice is responsible for managing products that will be 
 - All those microservices uses **oauth2** protocol to validate **jwt** sent in the costumer request.
 - That is, each microservice delegate **jwt validation** to identity provider, here keycloak
 
-  ## flow of user requests
-  ![exalt-bank-account-app-flows-1](https://github.com/user-attachments/assets/064e75af-cd6d-4d1a-b883-631da7a1076d)
-
 
 
 
