@@ -136,6 +136,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       KEYCLOAK_ISSUER_URI: ${KEYCLOAK_ISSUER_URI}
+      KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID}
 
   modushop-hexagonal-archi-bs-ms-product:
     image: placidenduwayo1/modushop-hexagonal-archi-bs-ms-product:latest
@@ -158,6 +159,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       KEYCLOAK_ISSUER_URI: ${KEYCLOAK_ISSUER_URI}
+      KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID}
 
   modushop-hexagonal-archi-bs-ms-order:
     image: placidenduwayo1/modushop-hexagonal-archi-bs-ms-order:latest
@@ -180,6 +182,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       KEYCLOAK_ISSUER_URI: ${KEYCLOAK_ISSUER_URI}
+      KEYCLOAK_CLIENT_ID: ${KEYCLOAK_CLIENT_ID}
 
 volumes:
   modushop-db-data:
