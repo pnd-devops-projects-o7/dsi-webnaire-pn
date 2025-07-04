@@ -3,14 +3,14 @@ spring:
     name: modushop-hexagonal-archi-bs-ms-product
 
   datasource:
-    url: jdbc:mysql://modushop-db:3306/products_db
+    url: jdbc:mysql://modushop-db:3306/${PRODUCT_DB}
 
   # we tell to microservice there is a idp to validate sent jwt token
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://modushop-keycloak-idp:8079/realms/modushop_app_realm
+          issuer-uri: ${KEYCLOAK_ISSUER_URI}
 
 server:
   port: 8082

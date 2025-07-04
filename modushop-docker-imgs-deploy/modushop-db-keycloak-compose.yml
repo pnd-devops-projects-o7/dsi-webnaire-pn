@@ -6,12 +6,12 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - modushop-db-data:/var/lib/mysql
     restart: unless-stopped
     healthcheck:
-      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-proot" ]
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost", "-u${MYSQL_USER}", "-p${MYSQL_ROOT_PASSWORD}" ]
       start_period: 30s
       interval: 15s
       timeout: 10s
@@ -26,10 +26,10 @@ services:
     environment:
       KC_DB: mysql
       KC_DB_URL: jdbc:mysql://modushop-db:3306/keycloak_db
-      KC_DB_USERNAME: root
-      KC_DB_PASSWORD: root
-      KC_BOOTSTRAP_ADMIN_USERNAME: admin
-      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_DB_USERNAME: ${MYSQL_USER}
+      KC_DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KC_BOOTSTRAP_ADMIN_USERNAME}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_BOOTSTRAP_ADMIN_PASSWORD}
       KC_HOSTNAME: modushop-keycloak-idp  #in production mode a hostname is required, hostname can be localhost or a dns
       KC_HTTP_PORT: 8079
       KC_HTTPS_PORT: 8443
@@ -37,7 +37,7 @@ services:
       KC_HTTPS_ENABLED: true
       KC_HEALTH_ENABLED: true
     command:
-      - start-dev
+      - start-dev # in production mode (- start),we create signed certificate to be authenticated on keycloak
       - --verbose
     depends_on:
       modushop-db:
@@ -106,7 +106,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
     environment:
-      KEYCLOAK_ISSUER_URI: http://modushop-keycloak-idp:8079/realms/modushop_app_realm
+      KEYCLOAK_ISSUER_URI: ${KEYCLOAK_ISSUER_URI}
 
   #--------- business microservices-----------
   modushop-hexagonal-archi-bs-ms-user:
@@ -145,7 +145,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
     environment:
-      KEYCLOAK_ISSUER_URI: http://modushop-keycloak-idp:8079/realms/modushop_app_realm
+      KEYCLOAK_ISSUER_URI: ${KEYCLOAK_ISSUER_URI}
 
   modushop-hexagonal-archi-bs-ms-order:
     image: placidenduwayo1/modushop-hexagonal-archi-bs-ms-order:latest
@@ -164,7 +164,7 @@ services:
         condition: service_healthy
     restart: unless-stopped
     environment:
-      KEYCLOAK_ISSUER_URI: http://modushop-keycloak-idp:8079/realms/modushop_app_realm
+      KEYCLOAK_ISSUER_URI: ${KEYCLOAK_ISSUER_URI}
 
 volumes:
   modushop-db-data:
