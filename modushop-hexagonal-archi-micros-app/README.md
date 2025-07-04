@@ -1,15 +1,18 @@
 # business microservices
-each business microservice: **user**, **product** and **order** of this sub forder is implemented into hexagonal architecture
+this sub folder contains business microservices, each one implemented into **hexagonal architecture**
 ## modu-shop-hexagonal-architecture-bs-ms-user
-this mciroservice manager customers
+business user microservice is responsible for managing customers that will order products
 ## modu-shop-hexagonal-architecture-bs-ms-product
-this mciroservice manager products
+business product microservice is responsible for managing products that will be ordered bu customers
 ## modu-shop-hexagonal-architecture-bs-ms-order
-- this mciroservice manager customers orders
-- this order service a cloud openfeign to get remote user and product
+- this order mciroservice is responsible for managing customers orders.
+- customer order is validated according customer and product availability
+- this order microservice uses **cloud openfeign** to join remote user and product services apis
 
-- Those microservices uses **oauth2** protocol to validate jwt sent in the costumer request.
-- That is, they delegate jwt validation to identity provider, here keycloak
+# security
+- All those microservices uses **oauth2** protocol to validate **jwt** sent in the costumer request.
+- That is, each microservice delegate **jwt validation** to identity provider, here keycloak
+
 
 
 
