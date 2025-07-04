@@ -20,4 +20,4 @@ remote:
     context-path: /api/products
 
 # client défini dans keycloak
-keycloak-client-id: backend-gateway-client-id
+keycloak-client-id: ${KEYCLOAK_CLIENT_ID}

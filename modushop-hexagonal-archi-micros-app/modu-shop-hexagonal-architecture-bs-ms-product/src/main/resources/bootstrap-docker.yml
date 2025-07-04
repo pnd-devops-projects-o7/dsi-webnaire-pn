@@ -8,4 +8,4 @@ spring:
       uri: http://modushop-configuration-service:8888
 
 # client défini dans keycloak
-keycloak-client-id: backend-gateway-client-id
+keycloak-client-id: ${KEYCLOAK_CLIENT_ID}
